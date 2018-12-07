@@ -2,12 +2,13 @@
 
 const STORE = {
   items: [
-      {name: "apples", checked: false},
-      {name: "oranges", checked: false},
-      {name: "milk", checked: true},
-      {name: "bread", checked: false}
+      {name: "apples", checked: false, searchMatch: false},
+      {name: "oranges", checked: false, searchMatch: false},
+      {name: "milk", checked: true, searchMatch: false},
+      {name: "bread", checked: false, searchMatch: false}
   ],
-  displayUncheckedOnly: false
+  displayUncheckedOnly: false,
+  displaySearchMatchOnly: false
 };
 
 function handleDisplayUncheckedOnlyItems() {
@@ -27,7 +28,7 @@ function hideCheckedItems () {
 
 
 
-function generateItemElement(item, itemIndex, searchMatch, template) {
+function generateItemElement(item, itemIndex, template) {
   return `
     <li class="js-item-index-element" data-item-index="${itemIndex}" ${STORE.displayUncheckedOnly && item.checked ? 'hidden' : ''}>
       <span class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : ''}">${item.name}</span>
@@ -59,8 +60,7 @@ function createSearchItem() {
 function searchThroughStoreForMatch(value) {
     //this will search through the store to find matching items
     //Using forEach, check if the searchbar value matches the name of the item... match?
-    console.log(`The current value of createSearchItem is ${value}`);
-    regExpTransform(value);
+    
 }
 
 function regExpTransform(value){
@@ -89,7 +89,6 @@ function renderShoppingList() {
   // render the shopping list in the DOM
   console.log('`renderShoppingList` ran');
   const shoppingListItemsString = generateShoppingItemsString(STORE.items);
-
   // insert that HTML into the DOM
   $('.js-shopping-list').html(shoppingListItemsString);
 }
@@ -97,7 +96,7 @@ function renderShoppingList() {
 
 function addItemToShoppingList(itemName) {
   console.log(`Adding "${itemName}" to shopping list`);
-  STORE.items.push({name: itemName, checked: false, searchMatch: true});
+  STORE.items.push({name: itemName, checked: false, searchMatch: false});
 }
 
 function handleNewItemSubmit() {
