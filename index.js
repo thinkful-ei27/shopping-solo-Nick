@@ -43,9 +43,12 @@ function generateItemElement(item, itemIndex, searchMatch, template) {
 }
 
 function handleNewSearchItemSubmit() {
-    //this will listen for any searches.
+    $('#js-shopping-list-search').submit(function(event) {
+        event.preventDefault();
+        console.log('You submitted a search! Current target is' + event.currentTarget);
+    })
     //COMPLICATION: ENTER stroke?
-    //Another case where we should toggle hidden...?
+   
 }
 
 function createSearchItem() {
@@ -130,6 +133,7 @@ function handleShoppingList() {
   handleItemCheckClicked();
   handleDeleteItemClicked();
   handleDisplayUncheckedOnlyItems();
+  handleNewSearchItemSubmit();
   console.log(STORE);
 }
 
