@@ -45,7 +45,6 @@ function generateItemElement(item, itemIndex, searchMatch, template) {
 function handleNewSearchItemSubmit() {
     $('#js-shopping-list-search').submit(function(event) {
         event.preventDefault();
-        console.log('You submitted a search! Current target is' + event.currentTarget);
         searchThroughStoreForMatch(createSearchItem());
         $('.js-shopping-list-search-entry').val('');
     })
@@ -61,13 +60,16 @@ function searchThroughStoreForMatch(value) {
     //this will search through the store to find matching items
     //Using forEach, check if the searchbar value matches the name of the item... match?
     console.log(`The current value of createSearchItem is ${value}`);
-    const testValue = RegExp(value);
-    const trueFalse = testValue.test(STORE.items[0].name);
-    console.log(`${STORE.items[0].name} is equal to ${value}: ${trueFalse}`);
+    regExpTransform(value);
 }
 
-function checkForMatch() {
+function regExpTransform(value){
+    const result = RegExp(value);
+    return RegExp(value);
+}
 
+function checkForMatch(searchBarValue, itemName) {
+    searchBarValue.test(itemName);
 }
 
 
