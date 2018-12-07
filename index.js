@@ -46,13 +46,15 @@ function handleNewSearchItemSubmit() {
     $('#js-shopping-list-search').submit(function(event) {
         event.preventDefault();
         console.log('You submitted a search! Current target is' + event.currentTarget);
+        createSearchItem();
     })
     //COMPLICATION: ENTER stroke?
    
 }
 
 function createSearchItem() {
-    //this will create a const variable for the search bar input
+    const searchItem = $('.js-shopping-list-search-entry').val();
+    console.log(searchItem);
 }
 
 function searchThroughStore() {
