@@ -22,12 +22,6 @@ function changeSTOREDisplayUncheckedOnly() {
     STORE.displayUncheckedOnly = !STORE.displayUncheckedOnly;
 }
 
-function hideCheckedItems () {
-    //Legacy code. This is currently being handled within the generateItemElement function
-}
-
-
-
 function generateItemElement(item, itemIndex, template) {
   return `
     <li class="js-item-index-element" data-item-index="${itemIndex}" \
@@ -48,7 +42,7 @@ function generateItemElement(item, itemIndex, template) {
 function handleNewSearchItemSubmit() {
     $('#js-shopping-list-search').submit(function(event) {
         event.preventDefault();
-        const testValue = regExpTransform($('.js-shopping-list-search-entry').val());
+        const testValue = RegExp($('.js-shopping-list-search-entry').val());
         $('.js-shopping-list-search-entry').val('');
         searchThroughStoreForMatch(testValue);
         STORE.displaySearchMatchOnly = true;
@@ -74,18 +68,9 @@ function searchThroughStoreForMatch(value) {
       }
     }
 
-
-function regExpTransform(value){
-    return RegExp(value);
-}
-
 function checkForMatch(value, itemName) {
     return value.test(itemName);
 }
-
-
-
-
 
 function generateShoppingItemsString(shoppingList) {
   console.log("Generating shopping list element");
