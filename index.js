@@ -46,7 +46,8 @@ function handleNewSearchItemSubmit() {
     $('#js-shopping-list-search').submit(function(event) {
         event.preventDefault();
         console.log('You submitted a search! Current target is' + event.currentTarget);
-        createSearchItem();
+        searchThroughStoreForMatch(createSearchItem());
+        $('.js-shopping-list-search-entry').val('');
     })
     //COMPLICATION: ENTER stroke?
    
@@ -54,12 +55,20 @@ function handleNewSearchItemSubmit() {
 
 function createSearchItem() {
     const searchItem = $('.js-shopping-list-search-entry').val();
-    console.log(searchItem);
+    return searchItem;
 }
 
-function searchThroughStore() {
+function searchThroughStoreForMatch(value) {
     //this will search through the store to find matching items
+    //Using forEach, check if the searchbar value matches the name of the item... match?
+    console.log(`The current value of createSearchItem is ${value}`);
 }
+
+function checkForMatch() {
+
+}
+
+
 
 
 
