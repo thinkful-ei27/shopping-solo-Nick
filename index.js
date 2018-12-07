@@ -49,7 +49,6 @@ function handleNewSearchItemSubmit() {
         searchThroughStoreForMatch(createSearchItem());
         $('.js-shopping-list-search-entry').val('');
     })
-    //COMPLICATION: ENTER stroke?
    
 }
 
@@ -62,7 +61,9 @@ function searchThroughStoreForMatch(value) {
     //this will search through the store to find matching items
     //Using forEach, check if the searchbar value matches the name of the item... match?
     console.log(`The current value of createSearchItem is ${value}`);
-    
+    const testValue = RegExp(value);
+    const trueFalse = testValue.test(STORE.items[0].name);
+    console.log(`${STORE.items[0].name} is equal to ${value}: ${trueFalse}`);
 }
 
 function checkForMatch() {
