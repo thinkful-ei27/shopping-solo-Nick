@@ -13,25 +13,25 @@ const STORE = {
 function handleDisplayUncheckedOnlyItems() {
     $('#displayUncheckedOnly').on('click', event=> {
         console.log('Checking works!');
+        changeSTOREDisplayUncheckedOnly();
+        renderShoppingList();
     })
-    //Listens for the checkbox being checked or unchecked. 
-    //This function should ultimately hide all checked items
 }
 
-function changeSTOREDisplayUncheckedOnly() {
-    //this function will change the displayUncheckedOnly key's value to the opposite
-
+function changeSTOREDisplayUncheckedOnly() {}
+    STORE.displayUncheckedOnly = !STORE.displayUncheckedOnly;
 }
 
 function hideCheckedItems () {
-    //this function should add the hidden class to checked items
+    //Legacy code. This is currently being handled within the generateItemElement function
+
 }
 
 
 
 function generateItemElement(item, itemIndex, template) {
   return `
-    <li class="js-item-index-element" data-item-index="${itemIndex}">
+    <li class="js-item-index-element" data-item-index="${itemIndex}" ${STORE.displayUncheckedOnly ? item.checked ? "hidden" : '' : ''}>
       <span class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : ''}">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle">
