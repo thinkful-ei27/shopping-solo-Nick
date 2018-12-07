@@ -48,11 +48,11 @@ function generateItemElement(item, itemIndex, template) {
 function handleNewSearchItemSubmit() {
     $('#js-shopping-list-search').submit(function(event) {
         event.preventDefault();
-        searchThroughStoreForMatch(regExpTransform(createSearchItem()));
+        const testValue = regExpTransform($('.js-shopping-list-search-entry').val());
         $('.js-shopping-list-search-entry').val('');
+        searchThroughStoreForMatch(testValue);
         STORE.displaySearchMatchOnly = true;
         renderShoppingList();
-        resetSTORESEARCHMATCH();
     })
    
 }
@@ -67,18 +67,13 @@ function resetSTOREDisplaySearchOnly(){
     STORE.displaySearchMatchOnly = false;
 }
 
-function createSearchItem() {
-    const searchItem = $('.js-shopping-list-search-entry').val();
-    return searchItem;
-}
-
 function searchThroughStoreForMatch(value) {
     for(let x = 0; x < STORE.items.length; x++){
-        if(checkForMatch(value, STORE.items[x].name) === true){
-            STORE.items[x].searchMatch = true;
-        }
+        checkForMatch(value, STORE.items[x].name) ?
+        STORE.items[x].searchMatch = true : STORE.items[x].searchMatch = false;
+      }
     }
-}
+
 
 function regExpTransform(value){
     return RegExp(value);
@@ -112,7 +107,7 @@ function renderShoppingList() {
 
 function addItemToShoppingList(itemName) {
   console.log(`Adding "${itemName}" to shopping list`);
-  STORE.items.push({name: itemName, checked: false, searchMatch: false});
+  STORE.items.push({name: itemName, checked: false, searchMatch: true});
 }
 
 function handleNewItemSubmit() {
