@@ -1,11 +1,14 @@
 'use strict';
 
-const STORE = [
-  {name: "apples", checked: false},
-  {name: "oranges", checked: false},
-  {name: "milk", checked: true},
-  {name: "bread", checked: false}
-];
+const STORE = {
+  items: [
+      {name: "apples", checked: false},
+      {name: "oranges", checked: false},
+      {name: "milk", checked: true},
+      {name: "bread", checked: false}
+  ],
+  display: 'All'
+};
 
 
 function generateItemElement(item, itemIndex, template) {
@@ -36,7 +39,7 @@ function generateShoppingItemsString(shoppingList) {
 function renderShoppingList() {
   // render the shopping list in the DOM
   console.log('`renderShoppingList` ran');
-  const shoppingListItemsString = generateShoppingItemsString(STORE);
+  const shoppingListItemsString = generateShoppingItemsString(STORE.items);
 
   // insert that HTML into the DOM
   $('.js-shopping-list').html(shoppingListItemsString);
@@ -45,7 +48,7 @@ function renderShoppingList() {
 
 function addItemToShoppingList(itemName) {
   console.log(`Adding "${itemName}" to shopping list`);
-  STORE.push({name: itemName, checked: false});
+  STORE.items.push({name: itemName, checked: false});
 }
 
 function handleNewItemSubmit() {
@@ -74,7 +77,7 @@ function handleItemCheckClicked() {
   });
 }
 function toggleCheckedForListItem(itemIndex) {
-    STORE[itemIndex].checked = !STORE[itemIndex].checked;
+    STORE.items[itemIndex].checked = !STORE.items[itemIndex].checked;
 }
 
 
@@ -87,13 +90,9 @@ function handleDeleteItemClicked() {
 }
 
 function deleteItem(index) {
-  STORE.splice(index, 1);
+  STORE.items.splice(index, 1);
 }
 
-// this function will be our callback when the page loads. it's responsible for
-// initially rendering the shopping list, and activating our individual functions
-// that handle new item submission and user clicks on the "check" and "delete" buttons
-// for individual shopping list items.
 function handleShoppingList() {
   renderShoppingList();
   handleNewItemSubmit();
@@ -101,5 +100,4 @@ function handleShoppingList() {
   handleDeleteItemClicked();
 }
 
-// when the page loads, call `handleShoppingList`
 $(handleShoppingList);
