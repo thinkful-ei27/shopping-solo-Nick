@@ -48,10 +48,23 @@ function generateItemElement(item, itemIndex, template) {
 function handleNewSearchItemSubmit() {
     $('#js-shopping-list-search').submit(function(event) {
         event.preventDefault();
-        searchThroughStoreForMatch(createSearchItem());
+        searchThroughStoreForMatch(regExpTransform(createSearchItem()));
         $('.js-shopping-list-search-entry').val('');
+        STORE.displaySearchMatchOnly = true;
+        renderShoppingList();
+        resetSTORESEARCHMATCH();
     })
    
+}
+
+function resetSTORESEARCHMATCH(){
+    STORE.items.forEach(function(element){
+       element.searchMatch = false;
+    });
+}
+
+function resetSTOREDisplaySearchOnly(){
+    STORE.displaySearchMatchOnly = false;
 }
 
 function createSearchItem() {
@@ -60,17 +73,19 @@ function createSearchItem() {
 }
 
 function searchThroughStoreForMatch(value) {
-    //this will search through the store to find matching items
-    //Using forEach, check if the searchbar value matches the name of the item... match?
-    
+    for(let x = 0; x < STORE.items.length; x++){
+        if(checkForMatch(value, STORE.items[x].name) === true){
+            STORE.items[x].searchMatch = true;
+        }
+    }
 }
 
 function regExpTransform(value){
     return RegExp(value);
 }
 
-function checkForMatch(searchBarValue, itemName) {
-    return searchBarValue.test(itemName);
+function checkForMatch(value, itemName) {
+    return value.test(itemName);
 }
 
 
