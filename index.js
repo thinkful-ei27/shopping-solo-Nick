@@ -2,17 +2,16 @@
 
 const STORE = {
   items: [
-      {name: "apples", checked: false},
-      {name: "oranges", checked: false},
-      {name: "milk", checked: true},
-      {name: "bread", checked: false}
+      {name: "apples", checked: false, searchMatch: true},
+      {name: "oranges", checked: false, searchMatch: true},
+      {name: "milk", checked: true, searchMatch: true},
+      {name: "bread", checked: false, searchMatch: true}
   ],
   displayUncheckedOnly: false
 };
 
 function handleDisplayUncheckedOnlyItems() {
     $('#displayUncheckedOnly').on('click', event=> {
-        console.log('Checking works!');
         changeSTOREDisplayUncheckedOnly();
         renderShoppingList();
     })
@@ -28,9 +27,9 @@ function hideCheckedItems () {
 
 
 
-function generateItemElement(item, itemIndex, template) {
+function generateItemElement(item, itemIndex, searchMatch, template) {
   return `
-    <li class="js-item-index-element" data-item-index="${itemIndex}" ${STORE.displayUncheckedOnly ? item.checked ? "hidden" : '' : ''}>
+    <li class="js-item-index-element" data-item-index="${itemIndex}" ${STORE.displayUncheckedOnly ? item.checked ? 'hidden' : '' : ''} ${searchMatch ? '' : 'hidden'}>
       <span class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : ''}">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle">
@@ -43,11 +42,26 @@ function generateItemElement(item, itemIndex, template) {
     </li>`;
 }
 
+function handleNewSearchItemSubmit() {
+    //this will listen for any searches.
+    //COMPLICATION: ENTER stroke?
+    //Another case where we should toggle hidden...?
+}
+
+function createSearchItem() {
+    //this will create a const variable for the search bar input
+}
+
+function searchThroughStore() {
+    //this will search through the store to find matching items
+}
+
+
 
 function generateShoppingItemsString(shoppingList) {
   console.log("Generating shopping list element");
 
-  const items = shoppingList.map((item, index) => generateItemElement(item, index));
+  const items = shoppingList.map((item, index, searchMatch) => generateItemElement(item, index, searchMatch));
   
   return items.join("");
 }
@@ -65,7 +79,7 @@ function renderShoppingList() {
 
 function addItemToShoppingList(itemName) {
   console.log(`Adding "${itemName}" to shopping list`);
-  STORE.items.push({name: itemName, checked: false});
+  STORE.items.push({name: itemName, checked: false, searchMatch: true});
 }
 
 function handleNewItemSubmit() {
@@ -116,6 +130,7 @@ function handleShoppingList() {
   handleItemCheckClicked();
   handleDeleteItemClicked();
   handleDisplayUncheckedOnlyItems();
+  console.log(STORE);
 }
 
 $(handleShoppingList);
