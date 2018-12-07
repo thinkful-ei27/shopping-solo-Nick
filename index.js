@@ -68,7 +68,6 @@ function getItemIndexFromElement(item) {
 
 function handleItemCheckClicked() {
   $('.js-shopping-list').on('click', `.js-item-toggle`, event => {
-    console.log('`handleItemCheckClicked` ran');
     const itemIndex = getItemIndexFromElement(event.currentTarget);
     toggleCheckedForListItem(itemIndex);
     renderShoppingList();
@@ -82,13 +81,13 @@ function toggleCheckedForListItem(itemIndex) {
 function handleDeleteItemClicked() {
   $('.js-shopping-list').on('click', `.js-item-delete`, event => {
       const itemIndex = getItemIndexFromElement(event.currentTarget);
-      //callback function for deletion
+      deleteItem(itemIndex);
+      renderShoppingList();
   });
 }
 
-function deleteItem(itemIndex) {
-  //This function will remove an item from the store based on item's Index
-  
+function deleteItem(index) {
+  STORE.splice(index, 1);
 }
 
 // this function will be our callback when the page loads. it's responsible for
