@@ -7,8 +7,9 @@ const STORE = {
       {name: "milk", checked: true},
       {name: "bread", checked: false}
   ],
-  display: 'All'
+  displayUncheckedOnly: false
 };
+
 
 
 function generateItemElement(item, itemIndex, template) {
