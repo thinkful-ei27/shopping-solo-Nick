@@ -30,7 +30,9 @@ function hideCheckedItems () {
 
 function generateItemElement(item, itemIndex, template) {
   return `
-    <li class="js-item-index-element" data-item-index="${itemIndex}" ${STORE.displayUncheckedOnly && item.checked ? 'hidden' : ''}>
+    <li class="js-item-index-element" data-item-index="${itemIndex}" \
+    ${STORE.displayUncheckedOnly && item.checked ? 'hidden' : ''}\
+    ${STORE.displaySearchMatchOnly && !item.searchMatch ? 'hidden' : ''}>
       <span class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : ''}">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle">
@@ -64,12 +66,11 @@ function searchThroughStoreForMatch(value) {
 }
 
 function regExpTransform(value){
-    const result = RegExp(value);
     return RegExp(value);
 }
 
 function checkForMatch(searchBarValue, itemName) {
-    searchBarValue.test(itemName);
+    return searchBarValue.test(itemName);
 }
 
 
