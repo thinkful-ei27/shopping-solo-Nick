@@ -10,6 +10,23 @@ const STORE = {
   displayUncheckedOnly: false
 };
 
+function handleDisplayUncheckedOnlyItems() {
+    $('#displayUncheckedOnly').on('click', event=> {
+        console.log('Checking works!');
+    })
+    //Listens for the checkbox being checked or unchecked. 
+    //This function should ultimately hide all checked items
+}
+
+function changeSTOREDisplayUncheckedOnly() {
+    //this function will change the displayUncheckedOnly key's value to the opposite
+
+}
+
+function hideCheckedItems () {
+    //this function should add the hidden class to checked items
+}
+
 
 
 function generateItemElement(item, itemIndex, template) {
@@ -99,6 +116,7 @@ function handleShoppingList() {
   handleNewItemSubmit();
   handleItemCheckClicked();
   handleDeleteItemClicked();
+  handleDisplayUncheckedOnlyItems();
 }
 
 $(handleShoppingList);
