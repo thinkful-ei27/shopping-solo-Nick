@@ -18,13 +18,12 @@ function handleDisplayUncheckedOnlyItems() {
     })
 }
 
-function changeSTOREDisplayUncheckedOnly() {}
+function changeSTOREDisplayUncheckedOnly() {
     STORE.displayUncheckedOnly = !STORE.displayUncheckedOnly;
 }
 
 function hideCheckedItems () {
     //Legacy code. This is currently being handled within the generateItemElement function
-
 }
 
 
