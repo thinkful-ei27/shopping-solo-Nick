@@ -2,10 +2,10 @@
 
 const STORE = {
   items: [
-      {name: "apples", checked: false, searchMatch: true},
-      {name: "oranges", checked: false, searchMatch: true},
-      {name: "milk", checked: true, searchMatch: true},
-      {name: "bread", checked: false, searchMatch: true}
+      {name: "apples", checked: false},
+      {name: "oranges", checked: false},
+      {name: "milk", checked: true},
+      {name: "bread", checked: false}
   ],
   displayUncheckedOnly: false
 };
@@ -29,7 +29,7 @@ function hideCheckedItems () {
 
 function generateItemElement(item, itemIndex, searchMatch, template) {
   return `
-    <li class="js-item-index-element" data-item-index="${itemIndex}" ${STORE.displayUncheckedOnly ? item.checked ? 'hidden' : '' : ''} ${searchMatch ? '' : 'hidden'}>
+    <li class="js-item-index-element" data-item-index="${itemIndex}" ${STORE.displayUncheckedOnly && item.checked ? 'hidden' : ''}>
       <span class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : ''}">${item.name}</span>
       <div class="shopping-item-controls">
         <button class="shopping-item-toggle js-item-toggle">
@@ -62,6 +62,7 @@ function searchThroughStoreForMatch(value) {
     //this will search through the store to find matching items
     //Using forEach, check if the searchbar value matches the name of the item... match?
     console.log(`The current value of createSearchItem is ${value}`);
+    
 }
 
 function checkForMatch() {
