@@ -24,20 +24,37 @@ function changeSTOREDisplayUncheckedOnly() {
 
 function generateItemElement(item, itemIndex, template) {
   return `
-    <li class="js-item-index-element" data-item-index="${itemIndex}" \
+    <li class='js-item-index-element' data-item-index='${itemIndex}' \
     ${STORE.displayUncheckedOnly && item.checked ? 'hidden' : ''}\
     ${STORE.displaySearchMatchOnly && !item.searchMatch ? 'hidden' : ''}>
-      <span class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : ''}">${item.name}</span>
-      <div class="shopping-item-controls">
-        <button class="shopping-item-toggle js-item-toggle">
-            <span class="button-label">check</span>
+      <span class='shopping-item js-shopping-item ${item.checked ? 'shopping-item__checked' : ''}'>${item.name}</span>
+      <div class='shopping-item-controls'>
+        <button class='shopping-item-toggle js-item-toggle'>
+            <span class='button-label'>check</span>
         </button>
-        <button class="shopping-item-delete js-item-delete">
+        <button class='shopping-item-delete js-item-delete'>
             <span class="button-label">delete</span>
+        </button>
+        <button class='shopping-item-edit js-item-edit' id='js-shopping-list-edit'>
+            <span class='button-label'>edit</span>
         </button>
       </div>
     </li>`;
 }
+
+function handleEditNameRequest() {
+  //listen for edit button click
+  $('#js-shopping-list-edit').on('click', function(event) {
+    console.log(event.currentTarget);
+  })
+  //prompt asks for new name for item
+  //JavaScript replaces old name in STORE with prompt's input
+  //(We have a function that gets the index)
+  //render list
+  renderShoppingList();
+}
+
+
 
 function handleNewSearchItemSubmit() {
     $('#js-shopping-list-search').submit(function(event) {
@@ -98,7 +115,6 @@ function addItemToShoppingList(itemName) {
 function handleNewItemSubmit() {
   $('#js-shopping-list-form').submit(function(event) {
     event.preventDefault();
-    console.log('`handleNewItemSubmit` ran');
     const newItemName = $('.js-shopping-list-entry').val();
     $('.js-shopping-list-entry').val('');
     addItemToShoppingList(newItemName);
@@ -144,6 +160,7 @@ function handleShoppingList() {
   handleDeleteItemClicked();
   handleDisplayUncheckedOnlyItems();
   handleNewSearchItemSubmit();
+  handleEditNameRequest();
   console.log(STORE);
 }
 
