@@ -44,14 +44,18 @@ function generateItemElement(item, itemIndex, template) {
 
 function handleEditNameRequest() {
   //listen for edit button click
-  $('#js-shopping-list-edit').on('click', function(event) {
-    console.log(event.currentTarget);
-  })
+  $('.shopping-item-edit').on('click', function(event) {
+    event.preventDefault();
+    const newName = prompt('Please insert new name for item');
+    console.log(newName);
+  }
+  );
+
   //prompt asks for new name for item
   //JavaScript replaces old name in STORE with prompt's input
   //(We have a function that gets the index)
   //render list
-  renderShoppingList();
+  
 }
 
 
