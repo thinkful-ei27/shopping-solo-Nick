@@ -45,9 +45,9 @@ function generateItemElement(item, itemIndex, template) {
 function handleEditNameRequest() {
   //listen for edit button click
   $('.shopping-item-edit').on('click', function(event) {
-    event.preventDefault();
+    const itemIndex = getItemIndexFromElement(event.currentTarget);
     const newName = prompt('Please insert new name for item');
-    console.log(newName);
+    console.log(newName, itemIndex);
   }
   );
 
