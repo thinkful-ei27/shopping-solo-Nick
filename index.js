@@ -43,23 +43,18 @@ function generateItemElement(item, itemIndex, template) {
 }
 
 function handleEditNameRequest() {
-  //listen for edit button click
   $('.js-shopping-list').on('click', '.shopping-item-edit', function(event) {
     const itemIndexNumber = getItemIndexFromElement(event.currentTarget);
     const newName = prompt('Please insert new name for item');
-    console.log(newName, itemIndexNumber);
+    changeItemName(newName, itemIndexNumber);
     renderShoppingList();
   }
-  );
-  //'.js-shopping-list' (first thing) second thing: should be button
-  //prompt asks for new name for item
-  //JavaScript replaces old name in STORE with prompt's input
-  //(We have a function that gets the index)
-  //render list
-  
+  )
 }
 
-
+function changeItemName (newName, itemIndexNumber) {
+  STORE.items[itemIndexNumber].name = newName;
+}
 
 function handleNewSearchItemSubmit() {
     $('#js-shopping-list-search').submit(function(event) {
