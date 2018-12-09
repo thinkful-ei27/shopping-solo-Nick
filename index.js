@@ -44,13 +44,14 @@ function generateItemElement(item, itemIndex, template) {
 
 function handleEditNameRequest() {
   //listen for edit button click
-  $('.shopping-item-edit').on('click', function(event) {
-    const itemIndex = getItemIndexFromElement(event.currentTarget);
+  $('.js-shopping-list').on('click', '.shopping-item-edit', function(event) {
+    const itemIndexNumber = getItemIndexFromElement(event.currentTarget);
     const newName = prompt('Please insert new name for item');
-    console.log(newName, itemIndex);
+    console.log(newName, itemIndexNumber);
+    renderShoppingList();
   }
   );
-
+  //'.js-shopping-list' (first thing) second thing: should be button
   //prompt asks for new name for item
   //JavaScript replaces old name in STORE with prompt's input
   //(We have a function that gets the index)
@@ -95,9 +96,7 @@ function checkForMatch(value, itemName) {
 
 function generateShoppingItemsString(shoppingList) {
   console.log("Generating shopping list element");
-
   const items = shoppingList.map((item, index, searchMatch) => generateItemElement(item, index, searchMatch));
-  
   return items.join("");
 }
 
@@ -134,7 +133,7 @@ function getItemIndexFromElement(item) {
 }
 
 function handleItemCheckClicked() {
-  $('.js-shopping-list').on('click', `.js-item-toggle`, event => {
+  $('.js-shopping-list').on('click', '.js-item-toggle', event => {
     const itemIndex = getItemIndexFromElement(event.currentTarget);
     toggleCheckedForListItem(itemIndex);
     renderShoppingList();
@@ -162,9 +161,9 @@ function handleShoppingList() {
   handleNewItemSubmit();
   handleItemCheckClicked();
   handleDeleteItemClicked();
+  handleEditNameRequest();
   handleDisplayUncheckedOnlyItems();
   handleNewSearchItemSubmit();
-  handleEditNameRequest();
   console.log(STORE);
 }
 
